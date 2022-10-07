@@ -1,0 +1,15 @@
+.commentBlock {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2em;
+}
+
+.commentReplies {
+  width: 80%;
+  align-self: flex-end;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}

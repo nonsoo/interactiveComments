@@ -73,6 +73,9 @@ body {
   max-width: 1000px;
   margin: 0 auto;
   padding: 1em;
+
+  display: grid;
+  gap: 2em;
 }
 
 @media screen and (min-width: 800px) {

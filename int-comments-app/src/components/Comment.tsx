@@ -1,12 +1,17 @@
 import { FC, useState } from "react";
+import { CommentProp } from "../utils/types/projectTypes";
 import "../styles/Comps/Comp.css";
 
 import { MdReply, MdEdit, MdDelete } from "react-icons/md";
 
-import ProfileImg from "../Imgs/avatars/image-amyrobson.png";
-
-const Comment: FC = () => {
-  const [commentRating, setCommentRating] = useState<number>(12);
+const Comment: FC<CommentProp> = ({
+  userName,
+  userImg,
+  postDate,
+  rating,
+  content,
+}) => {
+  const [commentRating, setCommentRating] = useState<number>(rating);
 
   const onIncrement = () => {
     setCommentRating((prev) => prev + 1);
@@ -31,17 +36,12 @@ const Comment: FC = () => {
 
       <div className="comment">
         <div className="commentUser">
-          <img src={ProfileImg} alt="" className="commentUser__Img" />
-          <p className="commentUser__Name">amyrobson</p>
-          <p className="commentUser__day">1 month ago</p>
+          <img src={userImg} alt="" className="commentUser__Img" />
+          <p className="commentUser__Name">{userName}</p>
+          <p className="commentUser__day">{postDate}</p>
         </div>
 
-        <p className="comment__Comment">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta ipsum,
-          voluptates esse molestias ad tempora? Minus nulla eligendi quas,
-          mollitia temporibus veritatis nemo laboriosam, optio molestiae, cumque
-          animi distinctio aliquam?
-        </p>
+        <p className="comment__Comment">{content}</p>
       </div>
 
       <div className="options">
