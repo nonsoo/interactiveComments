@@ -29,7 +29,7 @@ const Comment: FC = () => {
         </p>
       </div>
 
-      <div className="replyBtn">
+      <div className="options">
         <MdReply />
         <span className="replyBtn__text">Reply</span>
       </div>
