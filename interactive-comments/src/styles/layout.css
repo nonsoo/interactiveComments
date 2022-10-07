@@ -1,0 +1,79 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+:root {
+  /* FONTS */
+  --ff-prmy: "Open Sans", sans-serif;
+  --ff-sec: "Barlow", sans-serif;
+
+  --fs-prmy: 1rem;
+  --fs-sec: 1.1rem;
+  --fs-tri: 1.25rem;
+  --fs-four: 1.5rem;
+
+  --fw-prmy: 500;
+  --fw-sec: 700;
+
+  /* COLOURS */
+  --col-text-prmy: hsl(0, 0%, 0%);
+  --col-text-sec: hsl(0, 0%, 100%);
+
+  --col-background-prmy: hsl(270, 17%, 98%);
+  --col-background-sec: hsl(0, 0%, 100%);
+  --col-background-tri: hsl(240, 9%, 91%);
+
+  --col-acc-prmy: hsl(0, 84%, 68%);
+  --col-acc-sec: hsl(111, 32%, 38%);
+  --col-acc-tri: hsl(54, 85%, 74%);
+  --col-acc-four: hsla(240, 9%, 91%, 0.389);
+  --col-acc-five: hsla(0, 0%, 0%, 0.154);
+
+  /* box Shadows */
+  --box-shadow: 18px 14px 33px -7px rgba(0, 0, 0, 0.07);
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  width: 100vw;
+  height: 100vh;
+
+  font-family: var(--ff-prmy);
+  font-size: var(--fs-prmy);
+  font-weight: var(--fw-prmy);
+
+  background-color: var(--col-background-prmy);
+  color: var(--col-text-prmy);
+}
+
+@media screen and (min-width: 800px) {
+  :root {
+    --fs-prmy: 1rem;
+    --fs-sec: 1.25rem;
+    --fs-tri: 1.75rem;
+    --fs-four: 2rem;
+  }
+}
