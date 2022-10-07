@@ -12,7 +12,7 @@
   border-radius: 15px;
 
   grid-row: 2/3;
-  width: max-content;
+  width: 100%;
 }
 
 .rating__Rate {
@@ -28,6 +28,35 @@
 }
 
 .options {
+  grid-row: 2/3;
+}
+
+.UserOptions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  font-size: var(--fs-sec);
+}
+
+.UserOptions__Delete {
+  color: var(--col-soft-red);
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.UserOptions__Edit {
+  cursor: pointer;
+  color: var(--col-mod-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.replyBtn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,8 +66,6 @@
   cursor: pointer;
   color: var(--col-mod-blue);
   gap: 0.45em;
-
-  grid-row: 2/3;
 }
 
 .replyBtn__text {
