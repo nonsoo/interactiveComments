@@ -1,0 +1,67 @@
+.rating {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+
+  background-color: var(--col-light-gray2);
+
+  border-radius: 15px;
+}
+
+.rating__Rate {
+  font-weight: var(--fw-sec);
+  cursor: pointer;
+}
+
+.rating__number {
+  color: var(--col-mod-blue);
+
+  font-size: var(--fs-sec);
+}
+
+.replyBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: var(--fs-sec);
+
+  cursor: pointer;
+  color: var(--col-mod-blue);
+  gap: 0.45em;
+}
+
+.replyBtn__text {
+  font-weight: var(--fw-tri);
+}
+
+.commentUser {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+.comment__Comment {
+  margin-top: 1em;
+}
+
+.commentUser__Img {
+  width: 35px;
+  height: 35px;
+}
+
+.commentUser__Name {
+  font-weight: var(--fw-tri);
+}
+
+.commentCon {
+  display: flex;
+
+  padding: 1em;
+  background-color: var(--col-neut-white);
+  border-radius: 10px;
+}
