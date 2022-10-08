@@ -26,8 +26,6 @@ const App = () => {
     getData();
   }, []);
 
-  console.log(resData);
-
   const commentBlocks = resData?.comments;
 
   return (

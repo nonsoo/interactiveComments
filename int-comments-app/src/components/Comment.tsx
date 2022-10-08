@@ -1,8 +1,10 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { CommentProp } from "../utils/types/projectTypes";
 import "../styles/Comps/Comp.css";
 
 import { MdReply, MdEdit, MdDelete } from "react-icons/md";
+
+// import profImg from "../Imgs/avatars/image-maxblagun.png";
 
 const Comment: FC<CommentProp> = ({
   userName,
@@ -12,6 +14,7 @@ const Comment: FC<CommentProp> = ({
   content,
 }) => {
   const [commentRating, setCommentRating] = useState<number>(rating);
+  const [userImgImport, setUserImgImport] = useState<any>("");
 
   const onIncrement = () => {
     setCommentRating((prev) => prev + 1);
@@ -22,6 +25,15 @@ const Comment: FC<CommentProp> = ({
       setCommentRating((prev) => prev - 1);
     }
   };
+
+  useEffect(() => {
+    if (userImg) {
+      import(`../Imgs/avatars/${userImg}`)
+        .then((res) => setUserImgImport(res.default))
+        .catch((err) => console.error(err));
+    }
+  }, [userImg]);
+
   return (
     <section className="commentCon">
       <div className="rating">
@@ -36,7 +48,7 @@ const Comment: FC<CommentProp> = ({
 
       <div className="comment">
         <div className="commentUser">
-          <img src={userImg} alt="" className="commentUser__Img" />
+          <img src={userImgImport} alt="" className="commentUser__Img" />
           <p className="commentUser__Name">{userName}</p>
           <p className="commentUser__day">{postDate}</p>
         </div>
