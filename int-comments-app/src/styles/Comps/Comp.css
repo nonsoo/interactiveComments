@@ -157,6 +157,42 @@
   opacity: 0.3;
 }
 
+.updateBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  gap: 0.75em;
+  margin-top: 0.75em;
+}
+
+.updateBox__TextArea {
+  flex: 2;
+  resize: none;
+
+  padding: 0.55em;
+  color: var(--col-gray-blue);
+  border-radius: 5px;
+}
+
+.updateBox__Submit {
+  align-self: flex-end;
+
+  border: none;
+  border-radius: 10px;
+  padding: 0.55em 2em;
+  cursor: pointer;
+
+  background-color: var(--col-mod-blue);
+  color: var(--col-neut-white);
+
+  font-weight: var(--fw-tri);
+  transition: opacity 0.25s;
+}
+
+.updateBox__Submit:hover {
+  opacity: 0.3;
+}
 @media screen and (min-width: 50rem) {
   .rating {
     flex-direction: column;
@@ -164,7 +200,7 @@
 
   .commentCon {
     grid-template-columns: auto 1fr auto;
-    place-items: center;
+    align-items: center;
   }
 
   .rating {

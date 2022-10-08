@@ -22,6 +22,7 @@ const Comment: FC<CommentProp> = ({
   const [currUserImgImport, setCurrUserImgImport] = useState<any>("");
   const [replyMessage, setReplyMessage] = useState<string>("");
   const [replyStatus, setReplyStatus] = useState<boolean>(false);
+  const [onUpdateState, setOnUpdateState] = useState<boolean>(false);
 
   useEffect(() => {
     if (userImg) {
@@ -46,7 +47,13 @@ const Comment: FC<CommentProp> = ({
       setCommentRating((prev) => prev - 1);
     }
   };
-  const onSubmitForm = async (e: any) => {
+
+  const onUpdate = () => {
+    setOnUpdateState(true);
+    setReplyStatus(false);
+  };
+
+  const onSubmitForm = async (e: any, route: string) => {
     e.preventDefault();
 
     if (replyMessage === "") return;
@@ -61,9 +68,12 @@ const Comment: FC<CommentProp> = ({
         user: currUser,
       };
       try {
-        const data = await postData("http://localhost:5001/api/reply", {
-          comment: newReply,
-        });
+        let data: { status: number; data: any } | undefined;
+        if (route === "http://localhost:5001/api/reply") {
+          data = await postData(route, {
+            comment: newReply,
+          });
+        }
 
         if (data?.status === 200) {
           setResp(data.data.data);
@@ -98,21 +108,47 @@ const Comment: FC<CommentProp> = ({
             <p className="commentUser__day">{postDate}</p>
           </div>
 
-          <p className="comment__Comment">{content}</p>
+          {onUpdateState ? (
+            <form
+              className="updateBox"
+              onSubmit={(e) =>
+                onSubmitForm(e, "http://localhost:5001/api/reply")
+              }
+            >
+              <textarea
+                className="updateBox__TextArea"
+                value={replyMessage}
+                onChange={(e) => {
+                  setReplyMessage(e.target.value);
+                }}
+              />
+              <input
+                type="submit"
+                className="updateBox__Submit"
+                value="Update"
+              />
+            </form>
+          ) : (
+            <p className="comment__Comment">{content}</p>
+          )}
         </div>
 
         <div className="options">
           {myComment ? (
-            <div className="UserOptions">
-              <div className="UserOptions__Delete">
-                <MdDelete className="UserOptions__Delete--Icon" />
-                <span className="UserOptions__Delete--Text">Delete</span>
-              </div>
-              <div className="UserOptions__Edit">
-                <MdEdit className="UserOptions__Delete--Icon" />
-                <span className="UserOptions__Delete--Text">Edit</span>
-              </div>
-            </div>
+            <>
+              {!onUpdateState && (
+                <div className="UserOptions">
+                  <div className="UserOptions__Delete">
+                    <MdDelete className="UserOptions__Delete--Icon" />
+                    <span className="UserOptions__Delete--Text">Delete</span>
+                  </div>
+                  <div className="UserOptions__Edit" onClick={() => onUpdate()}>
+                    <MdEdit className="UserOptions__Delete--Icon" />
+                    <span className="UserOptions__Delete--Text">Edit</span>
+                  </div>
+                </div>
+              )}
+            </>
           ) : (
             <div className="replyBtn" onClick={() => setReplyStatus(true)}>
               <MdReply />
@@ -123,7 +159,10 @@ const Comment: FC<CommentProp> = ({
       </section>
 
       {replyStatus && (
-        <form className="replyBox" onSubmit={onSubmitForm}>
+        <form
+          className="replyBox"
+          onSubmit={(e) => onSubmitForm(e, "http://localhost:5001/api/reply")}
+        >
           <img
             src={currUserImgImport}
             alt="myProfilePic"
