@@ -41,7 +41,7 @@ const App = () => {
             content={comment.content}
             myComment={resData?.currentUser.username === comment.user.username}
             userID={comment.id}
-            currUserImg={resData?.currentUser.image.png}
+            currUser={resData?.currentUser}
             setResp={setResData}
           />
           <div className="commentReplies">
@@ -57,7 +57,7 @@ const App = () => {
                   resData?.currentUser.username === reply.user.username
                 }
                 userID={reply.id}
-                currUserImg={resData?.currentUser.image.png}
+                currUser={resData?.currentUser}
                 setResp={setResData}
               />
             ))}

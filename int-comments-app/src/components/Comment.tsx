@@ -14,7 +14,7 @@ const Comment: FC<CommentProp> = ({
   content,
   myComment,
   userID,
-  currUserImg,
+  currUser,
   setResp,
 }) => {
   const [commentRating, setCommentRating] = useState<number>(rating);
@@ -30,12 +30,12 @@ const Comment: FC<CommentProp> = ({
         .catch((err) => console.error(err));
     }
 
-    if (currUserImg) {
-      import(`../Imgs/avatars/${currUserImg}`)
+    if (currUser) {
+      import(`../Imgs/avatars/${currUser.image.png}`)
         .then((res) => setCurrUserImgImport(res.default))
         .catch((err) => console.error(err));
     }
-  }, [userImg, currUserImg]);
+  }, [userImg, currUser]);
 
   const onIncrement = () => {
     setCommentRating((prev) => prev + 1);
@@ -51,34 +51,29 @@ const Comment: FC<CommentProp> = ({
 
     if (replyMessage === "") return;
 
-    const newReply: reply = {
-      id: userID,
-      content: replyMessage,
-      createdAt: "1 minute ago change",
-      score: 3,
-      replyingTo: "change",
-      user: {
-        image: {
-          png: userImg,
-          webp: "",
-        },
-        username: userName,
-      },
-    };
+    if (currUser) {
+      const newReply: reply = {
+        id: userID,
+        content: replyMessage,
+        createdAt: "1 minute ago change",
+        score: 3,
+        replyingTo: "change",
+        user: currUser,
+      };
+      try {
+        const data = await postData("http://localhost:5001/api/reply", {
+          comment: newReply,
+        });
 
-    try {
-      const data = await postData("http://localhost:5001/api/reply", {
-        comment: newReply,
-      });
+        if (data?.status === 200) {
+          setResp(data.data.data);
+        }
 
-      if (data?.status === 200) {
-        setResp(data.data.data);
+        setReplyStatus(false);
+        setReplyMessage("");
+      } catch (e) {
+        console.error(e);
       }
-
-      setReplyStatus(false);
-      setReplyMessage("");
-    } catch (e) {
-      console.error(e);
     }
   };
 

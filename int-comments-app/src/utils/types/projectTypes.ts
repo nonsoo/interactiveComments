@@ -6,7 +6,7 @@ export interface CommentProp {
   content: string;
   myComment: boolean;
   userID: number;
-  currUserImg: string | undefined;
+  currUser: user | undefined;
   setResp?: any;
 }
 
