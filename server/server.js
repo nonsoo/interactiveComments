@@ -30,6 +30,16 @@ app.post("/api/reply", (req, res) => {
   res.status(200).json({ status: "ok", data });
 });
 
+app.put("/api/update/:id", (req, res) => {
+  const { comment } = req.body;
+  const { id } = req.params;
+
+  const test = data.comments[comment.id - 1].replies[id];
+  console.log(test);
+
+  res.status(200).json({ status: "ok", data });
+});
+
 app.listen(port, () => {
   console.log(`server is active on port ${port}`);
 });
