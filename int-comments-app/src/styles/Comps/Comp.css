@@ -117,9 +117,13 @@
   background-color: var(--col-neut-white);
   border-radius: 10px;
 
-  display: flex;
+  /* display: flex;
   gap: 1em;
-  align-items: flex-start;
+  align-items: flex-start; */
+
+  display: grid;
+  grid-template-columns: 50px 1fr 100px;
+  gap: 0.75em;
 }
 
 .replyBox__TextArea {
@@ -129,6 +133,12 @@
   padding: 0.55em;
   color: var(--col-gray-blue);
   border-radius: 5px;
+
+  grid-column: 1/-1;
+}
+
+.replyBox__Img {
+  grid-row: 3/4;
 }
 
 .replyBox__Submit {
@@ -142,6 +152,9 @@
 
   font-weight: var(--fw-tri);
   transition: opacity 0.25s;
+
+  grid-row: 3/4;
+  grid-column: 3/4;
 }
 
 .replyBox__Submit:hover {
@@ -154,7 +167,6 @@
   }
 
   .commentCon {
-    /* grid-template-columns: repeat(3, minmax(100px, 1fr)); */
     grid-template-columns: auto 1fr auto;
     place-items: center;
   }
@@ -168,6 +180,16 @@
   }
   .options {
     grid-column: 3/4;
+    grid-row: 1/2;
+  }
+
+  .replyBox__TextArea {
+    grid-column: 2/3;
+    grid-row: 1/4;
+  }
+
+  .replyBox__Img,
+  .replyBox__Submit {
     grid-row: 1/2;
   }
 }
