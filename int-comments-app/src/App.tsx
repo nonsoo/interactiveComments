@@ -7,6 +7,7 @@ import Comment from "./components/Comment";
 import { responseObj } from "./utils/types/projectTypes";
 
 import fetchData from "./utils/helpers/fetchdata";
+import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
   const [resData, setResData] = useState<responseObj>();
@@ -31,7 +32,7 @@ const App = () => {
   return (
     <div className="App">
       {commentBlocks?.map((comment) => (
-        <section className="commentBlock" key={comment.id}>
+        <section className="commentBlock" key={`${comment.id}-${uuidv4()}`}>
           <Comment
             userName={comment.user.username}
             userImg={comment.user.image.png}
@@ -46,7 +47,7 @@ const App = () => {
           <div className="commentReplies">
             {comment.replies.map((reply) => (
               <Comment
-                key={reply.id}
+                key={`${reply.id}-${uuidv4()}`}
                 userName={reply.user.username}
                 userImg={reply.user.image.png}
                 postDate={reply.createdAt}

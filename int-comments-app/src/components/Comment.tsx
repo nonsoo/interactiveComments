@@ -71,11 +71,12 @@ const Comment: FC<CommentProp> = ({
         comment: newReply,
       });
 
-      // setResp(data?.data.data)
-
       if (data?.status === 200) {
         setResp(data.data.data);
       }
+
+      setReplyStatus(false);
+      setReplyMessage("");
     } catch (e) {
       console.error(e);
     }
