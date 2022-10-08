@@ -31,7 +31,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {commentBlocks?.map((comment) => (
+      {commentBlocks?.map((comment, index) => (
         <section className="commentBlock" key={`${comment.id}-${uuidv4()}`}>
           <Comment
             userName={comment.user.username}
@@ -43,9 +43,10 @@ const App = () => {
             userID={comment.id}
             currUser={resData?.currentUser}
             setResp={setResData}
+            commentIndex={index}
           />
           <div className="commentReplies">
-            {comment.replies.map((reply) => (
+            {comment.replies.map((reply, index) => (
               <Comment
                 key={`${reply.id}-${uuidv4()}`}
                 userName={reply.user.username}
@@ -59,6 +60,7 @@ const App = () => {
                 userID={reply.id}
                 currUser={resData?.currentUser}
                 setResp={setResData}
+                commentIndex={index}
               />
             ))}
           </div>

@@ -3,6 +3,7 @@ import { CommentProp, reply } from "../utils/types/projectTypes";
 import "../styles/Comps/Comp.css";
 
 import postData from "../utils/helpers/postData";
+import updateData from "../utils/helpers/updateData";
 
 import { MdReply, MdEdit, MdDelete } from "react-icons/md";
 
@@ -16,6 +17,7 @@ const Comment: FC<CommentProp> = ({
   userID,
   currUser,
   setResp,
+  commentIndex,
 }) => {
   const [commentRating, setCommentRating] = useState<number>(rating);
   const [userImgImport, setUserImgImport] = useState<any>("");
@@ -73,8 +75,13 @@ const Comment: FC<CommentProp> = ({
           data = await postData(route, {
             comment: newReply,
           });
+        } else if (
+          route.substring(0, 33) === "http://localhost:5001/api/update/"
+        ) {
+          data = await updateData(route, {
+            comment: newReply,
+          });
         }
-
         if (data?.status === 200) {
           setResp(data.data.data);
         }
@@ -112,7 +119,10 @@ const Comment: FC<CommentProp> = ({
             <form
               className="updateBox"
               onSubmit={(e) =>
-                onSubmitForm(e, "http://localhost:5001/api/reply")
+                onSubmitForm(
+                  e,
+                  `http://localhost:5001/api/update/${commentIndex}`
+                )
               }
             >
               <textarea

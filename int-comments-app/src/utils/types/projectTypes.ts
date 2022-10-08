@@ -8,6 +8,7 @@ export interface CommentProp {
   userID: number;
   currUser: user | undefined;
   setResp?: any;
+  commentIndex: number;
 }
 
 export interface user {
