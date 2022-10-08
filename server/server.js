@@ -34,8 +34,7 @@ app.put("/api/update/:id", (req, res) => {
   const { comment } = req.body;
   const { id } = req.params;
 
-  const test = data.comments[comment.id - 1].replies[id];
-  console.log(test);
+  data.comments[comment.id - 1].replies[Number(id)].content = comment.content;
 
   res.status(200).json({ status: "ok", data });
 });
