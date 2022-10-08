@@ -18,6 +18,7 @@ const Comment: FC<CommentProp> = ({
   currUser,
   setResp,
   commentIndex,
+  toggleDelete,
 }) => {
   const [commentRating, setCommentRating] = useState<number>(rating);
   const [userImgImport, setUserImgImport] = useState<any>("");
@@ -148,7 +149,7 @@ const Comment: FC<CommentProp> = ({
             <>
               {!onUpdateState && (
                 <div className="UserOptions">
-                  <div className="UserOptions__Delete">
+                  <div className="UserOptions__Delete" onClick={toggleDelete}>
                     <MdDelete className="UserOptions__Delete--Icon" />
                     <span className="UserOptions__Delete--Text">Delete</span>
                   </div>

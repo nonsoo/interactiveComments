@@ -9,6 +9,7 @@ export interface CommentProp {
   currUser: user | undefined;
   setResp?: any;
   commentIndex: number;
+  toggleDelete: () => void;
 }
 
 export interface user {

@@ -1,5 +1,6 @@
 import "./styles/layout.css";
 import "./styles/Comps/CommentBlock.css";
+import "./styles/Comps/Modal.css";
 import { useEffect, useState } from "react";
 
 import Comment from "./components/Comment";
@@ -11,6 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
   const [resData, setResData] = useState<responseObj>();
+  const [deleteModal, setDeleteModal] = useState<boolean>(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -44,6 +46,7 @@ const App = () => {
             currUser={resData?.currentUser}
             setResp={setResData}
             commentIndex={index}
+            toggleDelete={() => setDeleteModal(true)}
           />
           <div className="commentReplies">
             {comment.replies.map((reply, index) => (
@@ -61,11 +64,33 @@ const App = () => {
                 currUser={resData?.currentUser}
                 setResp={setResData}
                 commentIndex={index}
+                toggleDelete={() => setDeleteModal(true)}
               />
             ))}
           </div>
         </section>
       ))}
+
+      {deleteModal && (
+        <div className="deleteModalCon">
+          <div className="deletModal">
+            <p className="deleteModal__Title">Delete comment</p>
+            <p className="deleteModal__Description">
+              Are you sure you want to delete this comment? This will remove the
+              comment and it cannot be undone.
+            </p>
+            <div className="deleteModal__BtnsCon">
+              <button
+                className="deleteModal__Btn"
+                onClick={() => setDeleteModal(false)}
+              >
+                No, Cancel
+              </button>
+              <button className="deleteModal__Btn">Yes, Delete</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
