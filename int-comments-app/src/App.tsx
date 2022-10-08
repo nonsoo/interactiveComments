@@ -39,6 +39,9 @@ const App = () => {
             rating={comment.score}
             content={comment.content}
             myComment={resData?.currentUser.username === comment.user.username}
+            userID={comment.id}
+            currUserImg={resData?.currentUser.image.png}
+            setResp={setResData}
           />
           <div className="commentReplies">
             {comment.replies.map((reply) => (
@@ -52,6 +55,9 @@ const App = () => {
                 myComment={
                   resData?.currentUser.username === reply.user.username
                 }
+                userID={reply.id}
+                currUserImg={resData?.currentUser.image.png}
+                setResp={setResData}
               />
             ))}
           </div>

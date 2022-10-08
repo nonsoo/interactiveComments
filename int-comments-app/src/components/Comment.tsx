@@ -1,10 +1,10 @@
 import { FC, useState, useEffect } from "react";
-import { CommentProp } from "../utils/types/projectTypes";
+import { CommentProp, reply } from "../utils/types/projectTypes";
 import "../styles/Comps/Comp.css";
 
-import { MdReply, MdEdit, MdDelete } from "react-icons/md";
+import postData from "../utils/helpers/postData";
 
-import ProfImg from "../Imgs/avatars/image-amyrobson.png";
+import { MdReply, MdEdit, MdDelete } from "react-icons/md";
 
 const Comment: FC<CommentProp> = ({
   userName,
@@ -13,9 +13,13 @@ const Comment: FC<CommentProp> = ({
   rating,
   content,
   myComment,
+  userID,
+  currUserImg,
+  setResp,
 }) => {
   const [commentRating, setCommentRating] = useState<number>(rating);
   const [userImgImport, setUserImgImport] = useState<any>("");
+  const [currUserImgImport, setCurrUserImgImport] = useState<any>("");
   const [replyMessage, setReplyMessage] = useState<string>("");
   const [replyStatus, setReplyStatus] = useState<boolean>(false);
 
@@ -25,7 +29,13 @@ const Comment: FC<CommentProp> = ({
         .then((res) => setUserImgImport(res.default))
         .catch((err) => console.error(err));
     }
-  }, [userImg]);
+
+    if (currUserImg) {
+      import(`../Imgs/avatars/${currUserImg}`)
+        .then((res) => setCurrUserImgImport(res.default))
+        .catch((err) => console.error(err));
+    }
+  }, [userImg, currUserImg]);
 
   const onIncrement = () => {
     setCommentRating((prev) => prev + 1);
@@ -36,8 +46,39 @@ const Comment: FC<CommentProp> = ({
       setCommentRating((prev) => prev - 1);
     }
   };
-  const onSubmitForm = (e: any) => {
+  const onSubmitForm = async (e: any) => {
     e.preventDefault();
+
+    if (replyMessage === "") return;
+
+    const newReply: reply = {
+      id: userID,
+      content: replyMessage,
+      createdAt: "1 minute ago change",
+      score: 3,
+      replyingTo: "change",
+      user: {
+        image: {
+          png: userImg,
+          webp: "",
+        },
+        username: userName,
+      },
+    };
+
+    try {
+      const data = await postData("http://localhost:5001/api/reply", {
+        comment: newReply,
+      });
+
+      // setResp(data?.data.data)
+
+      if (data?.status === 200) {
+        setResp(data.data.data);
+      }
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -87,7 +128,11 @@ const Comment: FC<CommentProp> = ({
 
       {replyStatus && (
         <form className="replyBox" onSubmit={onSubmitForm}>
-          <img src={ProfImg} alt="myProfilePic" className="replyBox__Img" />
+          <img
+            src={currUserImgImport}
+            alt="myProfilePic"
+            className="replyBox__Img"
+          />
           <textarea
             className="replyBox__TextArea"
             value={replyMessage}

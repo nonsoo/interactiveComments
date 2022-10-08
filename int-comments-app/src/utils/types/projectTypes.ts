@@ -5,6 +5,9 @@ export interface CommentProp {
   rating: number;
   content: string;
   myComment: boolean;
+  userID: number;
+  currUserImg: string | undefined;
+  setResp?: any;
 }
 
 export interface user {

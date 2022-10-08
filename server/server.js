@@ -18,8 +18,16 @@ app.get("/api/ping", (req, res) => {
   res.status(200).json({ error: "server is working" });
 });
 
+app.get("/api/users", (req, res) => {
+  res.status(200).json(data);
+});
+
 app.post("/api/reply", (req, res) => {
-  const { message } = req.body;
+  const { comment } = req.body;
+
+  data.comments[comment.id - 1].replies.push(comment);
+
+  res.status(200).json({ status: "ok", data });
 });
 
 app.listen(port, () => {
