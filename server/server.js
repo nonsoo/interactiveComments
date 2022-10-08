@@ -39,6 +39,15 @@ app.put("/api/update/:id", (req, res) => {
   res.status(200).json({ status: "ok", data });
 });
 
+app.delete("/api/delete/:id", (req, res) => {
+  const { comment } = req.body;
+  const { id } = req.params;
+
+  data.comments[comment.id - 1].replies.filter((reply) => reply.id !== id);
+
+  res.status(200).json({ status: "ok", data });
+});
+
 app.listen(port, () => {
   console.log(`server is active on port ${port}`);
 });
