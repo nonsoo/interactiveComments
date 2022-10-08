@@ -12,12 +12,14 @@ app.use(
   })
 );
 
+app.use(express.json());
+
 app.get("/api/ping", (req, res) => {
   res.status(200).json({ error: "server is working" });
 });
 
-app.get("/api/users", (req, res) => {
-  res.status(200).json(data);
+app.post("/api/reply", (req, res) => {
+  const { message } = req.body;
 });
 
 app.listen(port, () => {
