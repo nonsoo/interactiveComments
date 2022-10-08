@@ -4,14 +4,13 @@ import "../styles/Comps/Comp.css";
 
 import { MdReply, MdEdit, MdDelete } from "react-icons/md";
 
-// import profImg from "../Imgs/avatars/image-maxblagun.png";
-
 const Comment: FC<CommentProp> = ({
   userName,
   userImg,
   postDate,
   rating,
   content,
+  myComment,
 }) => {
   const [commentRating, setCommentRating] = useState<number>(rating);
   const [userImgImport, setUserImgImport] = useState<any>("");
@@ -57,7 +56,7 @@ const Comment: FC<CommentProp> = ({
       </div>
 
       <div className="options">
-        {true ? (
+        {myComment ? (
           <div className="UserOptions">
             <div className="UserOptions__Delete">
               <MdDelete className="UserOptions__Delete--Icon" />

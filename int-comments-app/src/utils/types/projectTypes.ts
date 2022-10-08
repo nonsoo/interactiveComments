@@ -4,6 +4,7 @@ export interface CommentProp {
   postDate: string;
   rating: number;
   content: string;
+  myComment: boolean;
 }
 
 export interface user {

@@ -38,6 +38,7 @@ const App = () => {
             postDate={comment.createdAt}
             rating={comment.score}
             content={comment.content}
+            myComment={resData?.currentUser.username === comment.user.username}
           />
           <div className="commentReplies">
             {comment.replies.map((reply) => (
@@ -48,6 +49,9 @@ const App = () => {
                 postDate={reply.createdAt}
                 rating={reply.score}
                 content={reply.content}
+                myComment={
+                  resData?.currentUser.username === reply.user.username
+                }
               />
             ))}
           </div>
