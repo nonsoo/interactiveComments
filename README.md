@@ -31,3 +31,16 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
 - Node.js backend with express.js
+
+## Installation
+
+Install interactive comments with npm using the following commands:
+
+1. `cd` into the `./int-comments-app` and run `npm i`
+2. `cd` into `./server` and run `npm i`
+
+Within the repective folders the development servers using:
+
+```bash
+  npm run start
+```
