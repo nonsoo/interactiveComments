@@ -1,0 +1,18 @@
+FROM node:16
+
+# sets the current working directory
+WORKDIR /app
+
+# Copy and install the modules in the package json to be cached
+COPY package*.json ./
+
+RUN npm install 
+
+# Copy all of the local files into the current working directory
+COPY . .
+
+ENV PORT=5001
+
+EXPOSE 5001
+
+CMD ["npm", "start"]
